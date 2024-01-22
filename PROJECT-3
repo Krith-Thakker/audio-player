@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/5cc8beaf2a.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <link rel="stylesheet" href="file.css">
+    <div class="container">
+        <div class="musicplayer">
+            <nav id="navbar">
+                <div id="leftangle">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
+                <div id="bars">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </nav>
+            <img src="https://media.licdn.com/dms/image/D5603AQHalxxgLZ4VhA/profile-displayphoto-shrink_800_800/0/1705903429910?e=1711584000&v=beta&t=wNE5ZxLZ4v7yOzONye8cmQHT_nJ2MZtztzCpju-JYZQ"
+                class="image">
+            <h1>DESPACITO</h1>
+            <p>
+                Luis Fonsi
+            </p>
+            <audio id="song">
+                <source src="Funky Carioca - Quincas Moreira.mp3" type="audio/mpeg">
+            </audio>
+
+
+            <input type="range" value="0" id="progress">
+            <div class="controls">
+
+                <div>
+                    <i class="fa-solid fa-backward"></i>
+                </div>
+                <div onclick="playPause()">
+                    <i id="ctrlIcon" class="fa-solid fa-play"></i>
+                </div>
+                <div>
+                    <i class="fa-solid fa-forward"></i>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+<style>
+    .image{
+        /* height: */
+        margin-top:50px;
+    }
+    .container{
+    height:100vh;
+    width:100%;
+    /* border:solid red; */
+    background-color: #db0746;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.musicplayer{
+    width:400px;
+    height:500px;
+    /* border:solid green; */
+    background-color: #ffe0e5;
+    text-align: center;
+    border-radius: 10px;
+}
+#leftangle{
+    /* border:solid purple; */
+    border-radius: 40px;
+    width:40px;
+    height:30px;
+    background-color:white ;
+    color:#f53192;
+    padding-top:10px;
+    box-shadow: 0 5px 10px rgba(255,26,26,0.22);
+    margin-top:10px;
+    margin-left: 10px;
+    /* justify-content: center;
+    align-items: center; */
+}
+ #bars{ 
+    /* border:solid orange; */ 
+    border-radius: 40px;
+    width:40px;
+    height:30px;
+    /* line-height: 40px; */
+    background-color: #fff;
+    color:#f53192;
+    padding-top:10px;
+    box-shadow: 0 5px 10px rgba(255,26,26,0.22);
+    margin-top: 10px;
+    margin-right: 10px;
+}
+#navbar{
+    /* border:solid green; */
+    display:flex;
+    justify-content: space-between;
+}
+.image{
+     /* height:100px; */
+    width:100px; 
+    border-radius:40px;
+    border:8px solid white;
+    box-shadow: 10px 10px 60px rgba(255,26,26,0.22);
+}
+h1{
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    color:#f53192;
+    font-style:initial;
+    /* margin-top:10px; */
+    padding-top:10px;
+}
+p{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: medium;
+    color:#f53192;
+    /* margin-top:20px; */
+    padding-top:5px;
+}
+/* #progress{
+    -webkit-appearance:none ;
+    border-radius: 20px;
+    color: #f53192;
+    width: 100px;
+    height:5px;
+    cursor:pointer;
+} */
+input{
+    -webkit-appearance: none;
+    border-radius: 20px;
+     width: 300px;
+     height:4px;
+     /* color:#f53192; */
+     background-color:#f53192;
+     cursor:pointer;
+}
+input::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    background-color: #f53192;
+    width:30px;
+    height:30px;
+    border-radius: 30px;
+    border:10px solid white;
+}
+.controls{
+    display:flex;
+    justify-content: space-between;
+    margin-top:40px;
+}
+.controls div:nth-child(1){
+    border-radius: 40px;
+    width:40px;
+    height:30px;
+    background-color: white;    
+    color:#f53192;
+    padding-top:10px;
+    box-shadow: 0 5px 10px rgba(255,26,26,0.22);
+    margin-top:30px;
+    margin-left: 10px;
+}
+.controls div:nth-child(3){ border-radius: 40px;
+    width:40px;
+    height:30px;
+    background-color: white;    
+    color:#f53192;
+    padding-top:10px;
+    box-shadow: 0 5px 10px rgba(255,26,26,0.22);
+    margin-top:30px;
+    margin-right: 10px;
+}
+.controls div:nth-child(2){
+    border-radius: 40px;
+    width:70px;
+    height:55px;
+    color: white;    
+    background-color:#f53192;
+    padding-top:25px;
+    box-shadow: 0 5px 10px rgba(255,26,26,0.22);
+    margin-top:10px;
+    font-size: 30px;
+    padding-left:7px;
+    /* margin-left: 10px; */
+}
+.fa-pause{
+    padding-right:10px;
+}
+
+</style>
+<script>
+    let progress = document.getElementById("progress");
+    let song = document.getElementById("song");
+    let ctrlIcon = document.getElementById("ctrlIcon");
+    song.onloadedmetadata = function () {
+        progress.max = song.duration;
+        progress.value = song.currentTime;
+    }
+    function playPause() {
+        if (ctrlIcon.classList.contains("fa-pause")) {
+            song.pause();
+            ctrlIcon.classList.remove("fa-pause");
+            ctrlIcon.classList.add("fa-play");
+        }
+        else {
+            song.play();
+            ctrlIcon.classList.remove("fa-play");
+            ctrlIcon.classList.add("fa-pause");
+        }
+    }
+    if (song.play()) {
+        setInterval(() => {
+            progress.value = song.currentTime;
+        }, 50);
+    }
+
+    progress.onchange = function () {
+        song.play();
+        song.currentTime = progress.value;
+        ctrlIcon.classList.add("fa-pause");
+        ctrlIcon.classList.remove("fa-play");
+    }
+</script>
+
+</html>
